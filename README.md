@@ -76,3 +76,5 @@ main (stable)
 ---
 
 *DevOps Lab Project — for demonstration purposes only.*
+
+Jenkins CI automation test
