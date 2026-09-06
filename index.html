@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Task Manager</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="container">
+
+    <header>
+      <h1>Student Task Manager</h1>
+      <p class="subtitle">Stay on top of your college tasks</p>
+    </header>
+
+    <!-- Task Input Section -->
+    <section class="input-section">
+      <input
+        type="text"
+        id="taskInput"
+        placeholder="Enter a new task..."
+        maxlength="100"
+      />
+      <button id="addTaskBtn" onclick="addTask()">Add Task</button>
+    </section>
+
+    <!-- Task List Section -->
+    <section class="task-section">
+      <h2>My Tasks</h2>
+      <ul id="taskList">
+        <!-- Tasks are inserted here by script.js -->
+      </ul>
+      <p id="emptyMessage" class="empty-message">No tasks yet. Add one above!</p>
+    </section>
+
+  </div>
+
+  <footer>
+    <p>DevOps Lab Project</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
