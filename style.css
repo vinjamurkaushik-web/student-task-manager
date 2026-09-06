@@ -82,13 +82,45 @@ header .subtitle {
   background-color: #1d4ed8;
 }
 
-/* --- Task List Section --- */
+/* --- Task Statistics Section --- */
+.stats-section {
+  margin-bottom: 28px;
+}
+
+.stats-section h2,
 .task-section h2 {
   font-size: 1.2rem;
   margin-bottom: 14px;
   color: #444;
 }
 
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.stat-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 16px 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.stat-card strong {
+  font-size: 1.7rem;
+  color: #2563eb;
+}
+
+/* --- Task List Section --- */
 #taskList {
   list-style: none;
   display: flex;
@@ -177,5 +209,9 @@ footer {
 
   .input-section button {
     width: 100%;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
   }
 }

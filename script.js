@@ -88,6 +88,8 @@ function renderTasks() {
   // Clear the existing list
   taskList.innerHTML = '';
 
+  updateStats();
+
   if (tasks.length === 0) {
     emptyMessage.style.display = 'block';
     return;
@@ -107,6 +109,23 @@ function renderTasks() {
 
     taskList.appendChild(li);
   });
+}
+
+// -----------------------------------------------
+// updateStats()
+// Calculates totals from the current tasks array and
+// updates the visible statistic cards.
+// -----------------------------------------------
+function updateStats() {
+  const totalTasks = tasks.length;
+  const completedTasks = tasks.filter(function (task) {
+    return task.completed;
+  }).length;
+  const pendingTasks = totalTasks - completedTasks;
+
+  document.getElementById('totalTasks').textContent = totalTasks;
+  document.getElementById('completedTasks').textContent = completedTasks;
+  document.getElementById('pendingTasks').textContent = pendingTasks;
 }
 
 // -----------------------------------------------
