@@ -156,3 +156,49 @@ function escapeHtml(text) {
   const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
   return text.replace(/[&<>"'"'"']/g, function (char) { return map[char]; });
 }
+
+// -----------------------------------------------
+// Theme (Dark / Light Mode)
+// Reads saved preference from localStorage on load
+// and wires up the toggle button.
+// -----------------------------------------------
+
+// Apply the saved theme immediately so there is no flash on reload.
+(function applyStoredTheme() {
+  const savedTheme = localStorage.getItem('studentTheme') || 'light';
+  if (savedTheme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+  // Update the button label once the DOM is ready.
+  document.addEventListener('DOMContentLoaded', function () {
+    updateToggleLabel(savedTheme);
+  });
+}());
+
+// toggleTheme()
+// Switches between light and dark mode and persists the choice.
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  const next = current === 'dark' ? 'light' : 'dark';
+
+  if (next === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+  }
+
+  localStorage.setItem('studentTheme', next);
+  updateToggleLabel(next);
+}
+
+// updateToggleLabel(theme)
+// Updates the toggle button text and icon to match the active theme.
+function updateToggleLabel(theme) {
+  const btn = document.getElementById('themeToggleBtn');
+  if (!btn) return;
+  if (theme === 'dark') {
+    btn.textContent = '☀️ Light Mode';
+  } else {
+    btn.textContent = '🌙 Dark Mode';
+  }
+}
