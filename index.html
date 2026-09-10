@@ -1,18 +1,31 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Student Task Manager</title>
   <link rel="stylesheet" href="style.css" />
+  <!-- Apply saved theme before paint to avoid flash -->
+  <script>
+    (function () {
+      if (localStorage.getItem('studentTheme') === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    }());
+  </script>
 </head>
 <body>
 
   <div class="container">
 
     <header>
-      <h1>Student Task Manager</h1>
-      <p class="subtitle">Stay on top of your college tasks</p>
+      <div class="header-top">
+        <div>
+          <h1>Student Task Manager</h1>
+          <p class="subtitle">Stay on top of your college tasks</p>
+        </div>
+        <button id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark Mode">🌙 Dark Mode</button>
+      </div>
     </header>
 
     <!-- Task Input Section -->

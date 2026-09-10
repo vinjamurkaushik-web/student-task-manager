@@ -1,4 +1,4 @@
-﻿// =============================================
+// =============================================
 //  Student Task Manager - script.js
 //  Feature 1: Task creation, completion, deletion
 //  and localStorage persistence.
@@ -156,3 +156,40 @@ function escapeHtml(text) {
   const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
   return text.replace(/[&<>"'"'"']/g, function (char) { return map[char]; });
 }
+
+// -----------------------------------------------
+// Theme (Dark / Light Mode)
+// Reads saved preference from localStorage on load
+// and wires up the toggle button.
+// -----------------------------------------------
+
+// toggleTheme()
+// Switches between light and dark mode and persists the choice.
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  const next = current === 'dark' ? 'light' : 'dark';
+
+  if (next === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+  }
+
+  localStorage.setItem('studentTheme', next);
+  updateToggleLabel(next);
+}
+
+// updateToggleLabel(theme)
+// Updates the toggle button text and icon to match the active theme.
+function updateToggleLabel(theme) {
+  const btn = document.getElementById('themeToggleBtn');
+  if (!btn) return;
+  btn.textContent = theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+}
+
+// Sync the button label with whatever theme is currently active
+// (set by the inline <head> script before paint).
+updateToggleLabel(
+  document.documentElement.getAttribute('data-theme') || 'light'
+);
+
