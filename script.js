@@ -1,4 +1,4 @@
-﻿// =============================================
+// =============================================
 //  Student Task Manager - script.js
 //  Feature 1: Task creation, completion, deletion
 //  and localStorage persistence.
@@ -163,18 +163,6 @@ function escapeHtml(text) {
 // and wires up the toggle button.
 // -----------------------------------------------
 
-// Apply the saved theme immediately so there is no flash on reload.
-(function applyStoredTheme() {
-  const savedTheme = localStorage.getItem('studentTheme') || 'light';
-  if (savedTheme === 'dark') {
-    document.documentElement.setAttribute('data-theme', 'dark');
-  }
-  // Update the button label once the DOM is ready.
-  document.addEventListener('DOMContentLoaded', function () {
-    updateToggleLabel(savedTheme);
-  });
-}());
-
 // toggleTheme()
 // Switches between light and dark mode and persists the choice.
 function toggleTheme() {
@@ -196,9 +184,12 @@ function toggleTheme() {
 function updateToggleLabel(theme) {
   const btn = document.getElementById('themeToggleBtn');
   if (!btn) return;
-  if (theme === 'dark') {
-    btn.textContent = '☀️ Light Mode';
-  } else {
-    btn.textContent = '🌙 Dark Mode';
-  }
+  btn.textContent = theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
 }
+
+// Sync the button label with whatever theme is currently active
+// (set by the inline <head> script before paint).
+updateToggleLabel(
+  document.documentElement.getAttribute('data-theme') || 'light'
+);
+
