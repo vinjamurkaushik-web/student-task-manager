@@ -1,4 +1,4 @@
-﻿# Student Task Manager
+# Student Task Manager
 
 A simple web application to manage your college tasks. Built as a **DevOps lab project** to demonstrate Git branching, GitHub Pull Requests, GitHub Pages deployment, and Jenkins CI pipelines.
 
@@ -10,7 +10,10 @@ A simple web application to manage your college tasks. Built as a **DevOps lab p
 - Tasks saved in localStorage (survive page refresh)
 - Clean, responsive design (desktop and mobile)
 - Task statistics counter *(added in Feature Branch 2)*
-- Dark mode toggle *(added in Feature Branch 2)*
+- **Dark Mode / Light Mode toggle** *(added in `feature/dark-mode`)*
+  - Smooth CSS transition between themes
+  - User preference saved to localStorage
+  - No flash of wrong theme on page reload (FOUC-free)
 
 ---
 
@@ -19,8 +22,8 @@ A simple web application to manage your college tasks. Built as a **DevOps lab p
 | Technology | Purpose |
 |---|---|
 | HTML | Page structure |
-| CSS | Styling and responsive layout |
-| JavaScript | Task logic and localStorage |
+| CSS | Styling, responsive layout, CSS custom properties for theming |
+| JavaScript | Task logic, localStorage, theme toggle |
 
 No frameworks, no dependencies, no build tools required.
 
@@ -38,9 +41,9 @@ No frameworks, no dependencies, no build tools required.
 
 ```
 student-task-manager/
-├── index.html    ← Page structure
-├── style.css     ← All styling
-├── script.js     ← Task logic and localStorage
+├── index.html    ← Page structure + theme init script
+├── style.css     ← All styling (CSS variables for light/dark)
+├── script.js     ← Task logic, localStorage, theme toggle
 ├── README.md     ← This file
 ├── Jenkinsfile   ← Jenkins CI pipeline
 └── .gitignore    ← Files excluded from Git
@@ -53,7 +56,8 @@ student-task-manager/
 ```
 main (stable)
  ├── feature/base-tasks       ← Student 1: core task features
- └── feature/stats-darkmode   ← Student 2: statistics + dark mode
+ ├── feature/stats-darkmode   ← Student 2: statistics + dark mode
+ └── feature/dark-mode        ← Dark mode toggle (this branch)
 ```
 
 1. Each student creates a **feature branch** from `main`
