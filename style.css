@@ -136,6 +136,21 @@ header .subtitle {
   border-color: var(--color-primary);
 }
 
+.input-section select {
+  padding: 12px 10px;
+  border: 2px solid #cbd5e1;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #333;
+  font-size: 1rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.input-section select:focus {
+  border-color: #2563eb;
+}
+
 .input-section button {
   padding: 12px 20px;
   background-color: var(--color-primary);
@@ -227,6 +242,16 @@ header .subtitle {
   word-break: break-word;
   color: var(--color-text);
   transition: color 0.3s ease;
+}
+
+.task-category {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 /* Strike-through when completed */
