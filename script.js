@@ -24,6 +24,7 @@ document.getElementById('taskInput').addEventListener('keypress', function (even
 // -----------------------------------------------
 function addTask() {
   const input = document.getElementById('taskInput');
+  const categoryInput = document.getElementById('categoryInput');
   const taskName = input.value.trim();
 
   if (taskName === '') {
@@ -35,6 +36,7 @@ function addTask() {
   const newTask = {
     id: Date.now(),        // use timestamp as a simple unique ID
     name: taskName,
+    category: categoryInput.value,
     completed: false
   };
 
@@ -105,6 +107,7 @@ function renderTasks() {
     li.innerHTML =
       '<input type="checkbox" ' + (task.completed ? 'checked' : '') + ' onchange="toggleTask(' + task.id + ')" />' +
       '<span class="task-name">' + escapeHtml(task.name) + '</span>' +
+      '<span class="task-category">' + escapeHtml(task.category || 'Other') + '</span>' +
       '<button class="delete-btn" onclick="deleteTask(' + task.id + ')" title="Delete task">&#x1F5D1;</button>';
 
     taskList.appendChild(li);
