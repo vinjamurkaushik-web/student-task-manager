@@ -1,0 +1,3 @@
+# Browser automation and test runner used by this project.
+pytest>=8.0,<9.0
+selenium>=4.20,<5.0

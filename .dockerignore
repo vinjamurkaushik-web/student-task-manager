@@ -1,0 +1,10 @@
+# Keep Git metadata and local-only documentation out of the web image.
+.git
+.gitignore
+
+# Selenium tests have their own image and do not belong in the web image.
+tests
+
+# These instructions are project notes, not files served by Nginx.
+docker.md
+00 shared context.md
