@@ -6,9 +6,26 @@ A framework-free to-do application used for a DevOps lab demonstration of Git br
 
 - Add, complete, and delete tasks; task data is saved in browser localStorage.
 - Task statistics and a responsive layout.
-- Dark/light theme preference saved in localStorage.
+- Dark/light theme preference saved in localStorage, including preference persistence.
 - Signup, login, logout, and profile editing using browser localStorage.
+- User-specific task lists saved in browser localStorage.
 - Selenium tests for authentication, profile, task persistence/isolation, and theme behavior.
+
+## Authentication
+
+Create an account at `signup.html`, then log in at `login.html`. The profile page
+lets the logged-in user edit their name and change their password. Email is
+displayed as read-only account information.
+Each account's tasks are stored under a separate `tasks_<userId>` localStorage
+key, so task lists remain separate when accounts are switched in the same browser.
+The `theme` preference follows the shared contract; the original `studentTheme`
+key remains supported and is kept in sync for compatibility.
+
+This is an academic demonstration that stores accounts and sessions in browser
+localStorage and uses a simple deterministic hash for password checks. It is not
+production-grade authentication and does not protect data from someone who can
+inspect or modify the browser. A real application must authenticate through a
+backend and use secure server-side password hashing.
 
 > **Demo limitation:** Authentication and task data are stored in the browser, not on a server. This is for a classroom demonstration and is not suitable for real accounts or sensitive data.
 
@@ -100,7 +117,7 @@ docker compose down
 
 The Selenium cases cover the following contract and expected outcomes:
 
-Test results are pending: the auth pages are not yet present on this branch, and Docker Engine is unavailable in the current environment.
+Test results are pending until the merged application and Selenium suite are run.
 
 | ID | Scenario | Expected result | Result |
 |---|---|---|---|

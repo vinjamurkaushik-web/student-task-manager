@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile | Student Task Manager</title>
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    if ((localStorage.getItem('theme') || localStorage.getItem('studentTheme')) === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  </script>
+  <script src="auth.js"></script>
+  <script>requireLogin();</script>
+</head>
+<body>
+  <main class="container profile-container">
+    <header class="profile-header">
+      <div>
+        <h1>My Profile</h1>
+        <p class="subtitle" id="user-greeting"></p>
+      </div>
+      <nav class="profile-nav" aria-label="Profile navigation">
+        <a id="back-to-tasks" class="button-link" href="index.html">Back to tasks</a>
+        <button id="logout-btn" type="button" class="secondary-button">Log out</button>
+      </nav>
+    </header>
+
+    <section class="auth-card profile-card" aria-labelledby="profile-heading">
+      <h2 id="profile-heading">Profile information</h2>
+      <form id="profile-form" novalidate>
+        <div class="form-field">
+          <label for="profile-name">Name</label>
+          <input id="profile-name" name="name" type="text" autocomplete="name" required />
+        </div>
+        <div class="form-field">
+          <label for="profile-email">Email</label>
+          <input id="profile-email" name="email" type="email" autocomplete="email" readonly />
+        </div>
+        <p id="profile-message" class="form-message success" role="status" hidden></p>
+        <button id="profile-save" type="submit">Save profile</button>
+      </form>
+    </section>
+
+    <section class="auth-card profile-card" aria-labelledby="password-heading">
+      <h2 id="password-heading">Change password</h2>
+      <form id="password-form" novalidate>
+        <div class="form-field">
+          <label for="current-password">Current password</label>
+          <input id="current-password" name="current-password" type="password" autocomplete="current-password" required />
+        </div>
+        <div class="form-field">
+          <label for="new-password">New password</label>
+          <input id="new-password" name="new-password" type="password" autocomplete="new-password" required />
+          <small>At least 6 characters.</small>
+        </div>
+        <p id="password-message" class="form-message success" role="status" hidden></p>
+        <button id="change-password-btn" type="submit">Change password</button>
+      </form>
+    </section>
+  </main>
+  <footer><p>DevOps Lab Project</p></footer>
+</body>
+</html>

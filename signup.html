@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Account | Student Task Manager</title>
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    if ((localStorage.getItem('theme') || localStorage.getItem('studentTheme')) === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  </script>
+  <script src="auth.js"></script>
+</head>
+<body>
+  <main class="container auth-container">
+    <header>
+      <h1>Student Task Manager</h1>
+      <p class="subtitle">Create an account to organize your tasks.</p>
+    </header>
+    <section class="auth-card" aria-labelledby="signup-heading">
+      <h2 id="signup-heading">Create your account</h2>
+      <form id="signup-form" novalidate>
+        <div class="form-field">
+          <label for="signup-name">Name</label>
+          <input id="signup-name" name="name" type="text" autocomplete="name" required />
+        </div>
+        <div class="form-field">
+          <label for="signup-email">Email</label>
+          <input id="signup-email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <div class="form-field">
+          <label for="signup-password">Password</label>
+          <input id="signup-password" name="password" type="password" autocomplete="new-password" aria-describedby="password-hint" required />
+          <small id="password-hint">At least 6 characters.</small>
+        </div>
+        <div class="form-field">
+          <label for="signup-confirm">Confirm password</label>
+          <input id="signup-confirm" name="confirm-password" type="password" autocomplete="new-password" required />
+        </div>
+        <p id="signup-error" class="form-message error" role="alert" hidden></p>
+        <p id="signup-message" class="form-message success" role="status" hidden></p>
+        <button id="signup-submit" type="submit">Create account</button>
+      </form>
+      <p class="auth-switch">Already have an account? <a id="goto-login" href="login.html">Log in</a></p>
+    </section>
+  </main>
+  <footer><p>DevOps Lab Project</p></footer>
+</body>
+</html>

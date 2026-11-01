@@ -5,7 +5,8 @@
 // =============================================
 
 // Load existing tasks from localStorage on page load
-let tasks = loadTasksFromStorage();
+const currentUser = getCurrentUser();
+let tasks = currentUser ? loadTasksFromStorage() : [];
 
 // Render tasks when the page first opens
 renderTasks();
@@ -24,6 +25,7 @@ document.getElementById('taskInput').addEventListener('keypress', function (even
 // -----------------------------------------------
 function addTask() {
   const input = document.getElementById('taskInput');
+  const categoryInput = document.getElementById('categoryInput');
   const taskName = input.value.trim();
 
   if (taskName === '') {
@@ -35,6 +37,7 @@ function addTask() {
   const newTask = {
     id: Date.now(),        // use timestamp as a simple unique ID
     name: taskName,
+    category: categoryInput.value,
     completed: false
   };
 
@@ -105,6 +108,7 @@ function renderTasks() {
     li.innerHTML =
       '<input type="checkbox" ' + (task.completed ? 'checked' : '') + ' onchange="toggleTask(' + task.id + ')" />' +
       '<span class="task-name">' + escapeHtml(task.name) + '</span>' +
+      '<span class="task-category">' + escapeHtml(task.category || 'Other') + '</span>' +
       '<button class="delete-btn" onclick="deleteTask(' + task.id + ')" title="Delete task">&#x1F5D1;</button>';
 
     taskList.appendChild(li);
@@ -134,7 +138,12 @@ function updateStats() {
 // in the browser localStorage.
 // -----------------------------------------------
 function saveTasksToStorage(tasks) {
-  localStorage.setItem('studentTasks', JSON.stringify(tasks));
+  if (!currentUser) return;
+  try {
+    localStorage.setItem('tasks_' + currentUser.id, JSON.stringify(tasks));
+  } catch (error) {
+    console.error('Unable to save tasks.', error);
+  }
 }
 
 // -----------------------------------------------
@@ -143,8 +152,23 @@ function saveTasksToStorage(tasks) {
 // array if nothing is stored yet.
 // -----------------------------------------------
 function loadTasksFromStorage() {
-  const stored = localStorage.getItem('studentTasks');
-  return stored ? JSON.parse(stored) : [];
+  if (!currentUser) return [];
+  const stored = localStorage.getItem('tasks_' + currentUser.id);
+  if (!stored) return [];
+  try {
+    const parsed = JSON.parse(stored);
+    if (!Array.isArray(parsed)) {
+      console.error('Stored task data is not a valid list.');
+      return [];
+    }
+    return parsed.filter(function (task) {
+      return task && typeof task === 'object' && typeof task.name === 'string' &&
+        (task.category === undefined || typeof task.category === 'string');
+    });
+  } catch (error) {
+    console.error('Unable to read stored tasks.', error);
+    return [];
+  }
 }
 
 // -----------------------------------------------
@@ -176,6 +200,7 @@ function toggleTheme() {
   }
 
   localStorage.setItem('studentTheme', next);
+  localStorage.setItem('theme', next);
   updateToggleLabel(next);
 }
 
@@ -192,4 +217,3 @@ function updateToggleLabel(theme) {
 updateToggleLabel(
   document.documentElement.getAttribute('data-theme') || 'light'
 );
-
