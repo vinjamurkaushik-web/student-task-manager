@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Log In | Student Task Manager</title>
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    if ((localStorage.getItem('theme') || localStorage.getItem('studentTheme')) === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  </script>
+  <script src="auth.js"></script>
+</head>
+<body>
+  <main class="container auth-container">
+    <header>
+      <h1>Student Task Manager</h1>
+      <p class="subtitle">Log in to continue to your tasks.</p>
+    </header>
+    <section class="auth-card" aria-labelledby="login-heading">
+      <h2 id="login-heading">Welcome back</h2>
+      <form id="login-form" novalidate>
+        <div class="form-field">
+          <label for="login-email">Email</label>
+          <input id="login-email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <div class="form-field">
+          <label for="login-password">Password</label>
+          <input id="login-password" name="password" type="password" autocomplete="current-password" required />
+        </div>
+        <p id="login-error" class="form-message error" role="alert" hidden></p>
+        <p id="login-message" class="form-message success" role="status" hidden></p>
+        <button id="login-submit" type="submit">Log in</button>
+      </form>
+      <p class="auth-switch">New here? <a id="goto-signup" href="signup.html">Create an account</a></p>
+    </section>
+  </main>
+  <footer><p>DevOps Lab Project</p></footer>
+</body>
+</html>

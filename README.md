@@ -14,6 +14,24 @@ A simple web application to manage your college tasks. Built as a **DevOps lab p
   - Smooth CSS transition between themes
   - User preference saved to localStorage
   - No flash of wrong theme on page reload (FOUC-free)
+- Client-side signup, login, logout, and profile management
+- User-specific task lists saved in browser localStorage
+
+## Authentication
+
+Create an account at `signup.html`, then log in at `login.html`. The profile page
+lets the logged-in user edit their name and change their password. Email is
+displayed as read-only account information.
+Each account's tasks are stored under a separate `tasks_<userId>` localStorage
+key, so task lists remain separate when accounts are switched in the same browser.
+The `theme` preference follows the shared contract; the original `studentTheme`
+key remains supported and is kept in sync for compatibility.
+
+This is an academic demonstration that stores accounts and sessions in browser
+localStorage and uses a simple deterministic hash for password checks. It is not
+production-grade authentication and does not protect data from someone who can
+inspect or modify the browser. A real application must authenticate through a
+backend and use secure server-side password hashing.
 
 ---
 
@@ -33,7 +51,8 @@ No frameworks, no dependencies, no build tools required.
 
 1. Clone or download this repository
 2. Open `index.html` in any modern browser
-3. Done — no server or installation needed
+3. Open `login.html` or `signup.html` and create an account — no server or
+   installation needed
 
 ---
 
@@ -42,8 +61,12 @@ No frameworks, no dependencies, no build tools required.
 ```
 student-task-manager/
 ├── index.html    ← Page structure + theme init script
+├── login.html    ← Login form
+├── signup.html  ← Registration form
+├── profile.html ← Profile and password management
 ├── style.css     ← All styling (CSS variables for light/dark)
-├── script.js     ← Task logic, localStorage, theme toggle
+├── script.js     ← User-specific task logic and theme toggle
+├── auth.js       ← Client-side demo authentication
 ├── README.md     ← This file
 ├── Jenkinsfile   ← Jenkins CI pipeline
 └── .gitignore    ← Files excluded from Git
