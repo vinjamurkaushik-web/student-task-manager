@@ -1,6 +1,7 @@
 # Start the static app with `docker compose up --build`.
 services:
   web:
+    image: sohails2409/student-task-manager:latest
     build:
       context: .
     ports:
@@ -30,6 +31,7 @@ services:
     environment:
       BASE_URL: http://web
       SELENIUM_URL: http://selenium:4444/wd/hub
+      PYTHONUNBUFFERED: "1"
     depends_on:
       web:
         condition: service_started

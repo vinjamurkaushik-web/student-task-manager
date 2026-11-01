@@ -61,6 +61,18 @@ docker compose up --build
 ```
 
 Open <http://localhost:8080> to use the app. Press `Ctrl+C` to stop the foreground services.
+The `web` image is tagged `sohails2409/student-task-manager:latest`; after the image builds, find it under **Images** in Docker Desktop. The running app appears under **Containers**.
+
+## Publish the app image to Docker Hub
+
+Sign in to Docker Desktop with the `sohails2409` Docker Hub account, or run `docker login` and authenticate interactively. Do not put an access token or password in this repository. Create a **public** repository named `student-task-manager` under that account, then build and publish the web image:
+
+```powershell
+docker compose build web
+docker compose push web
+```
+
+The published image will be `sohails2409/student-task-manager:latest` on Docker Hub. The same image tag is visible in Docker Desktop under **Images**. Publishing requires Docker Desktop's Linux engine to be running and the app files listed in the Dockerfile to exist in the checkout.
 
 Dockerfile details:
 
@@ -75,8 +87,10 @@ With no profile selected, Compose starts only `web`. The `test` profile adds Sel
 Run the test profile from the project directory:
 
 ```powershell
-docker compose --profile test run --rm tests
+docker compose --profile test run --build --rm tests
 ```
+
+Pytest runs in verbose, unbuffered mode: each test name and its `PASSED` or `FAILED` result appears in the terminal as it finishes, followed by a full result summary.
 
 Compose starts the web app and waits for Selenium's `/status` health check before launching pytest. The suite creates a fresh remote Chrome session per test and uses explicit waits for page behavior. To stop and remove the Compose services afterward:
 

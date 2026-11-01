@@ -39,7 +39,7 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                bat 'docker build -t todo-app .'
+                bat 'docker compose build web'
             }
         }
 

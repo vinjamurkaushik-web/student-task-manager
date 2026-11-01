@@ -11,5 +11,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the Selenium suite into the test image.
 COPY . .
 
-# Run the suite when Compose starts the test service.
-CMD ["pytest", "-v"]
+# Print each result as it finishes, show captured test output, and repeat all
+# outcomes in pytest's final summary when Compose starts the test service.
+CMD ["python", "-u", "-m", "pytest", "-vv", "-rA", "-s"]
