@@ -1,0 +1,41 @@
+# Start the static app with `docker compose up --build`.
+services:
+  web:
+    image: sohails2409/student-task-manager:latest
+    build:
+      context: .
+    ports:
+      - "8080:80"
+
+  # Selenium provides a remote Chrome browser and a live noVNC view on port 7900.
+  selenium:
+    image: selenium/standalone-chrome
+    shm_size: 2gb
+    profiles:
+      - test
+    ports:
+      - "4444:4444"
+      - "7900:7900"
+    healthcheck:
+      # Wait until Selenium Grid reports that it can accept browser sessions.
+      test: ["CMD", "curl", "-f", "http://localhost:4444/status"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+  # The test runner starts only when explicitly requested with the test profile.
+  tests:
+    build:
+      context: ./tests
+    environment:
+      BASE_URL: http://web
+      SELENIUM_URL: http://selenium:4444/wd/hub
+      PYTHONUNBUFFERED: "1"
+    depends_on:
+      web:
+        condition: service_started
+      selenium:
+        condition: service_healthy
+    profiles:
+      - test

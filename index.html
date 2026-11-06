@@ -8,11 +8,13 @@
   <!-- Apply saved theme before paint to avoid flash -->
   <script>
     (function () {
-      if (localStorage.getItem('studentTheme') === 'dark') {
+      if ((localStorage.getItem('theme') || localStorage.getItem('studentTheme')) === 'dark') {
         document.documentElement.setAttribute('data-theme', 'dark');
       }
     }());
   </script>
+  <script src="auth.js"></script>
+  <script>requireLogin();</script>
 </head>
 <body>
 
@@ -23,8 +25,13 @@
         <div>
           <h1>Student Task Manager</h1>
           <p class="subtitle">Stay on top of your college tasks</p>
+          <p id="user-greeting" class="user-greeting"></p>
         </div>
-        <button id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark Mode">🌙 Dark Mode</button>
+        <div class="header-actions">
+          <a id="profile-link" class="button-link" href="profile.html">Profile</a>
+          <button id="logout-btn" type="button" class="secondary-button">Log out</button>
+          <button id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark Mode">🌙 Dark Mode</button>
+        </div>
       </div>
     </header>
 
